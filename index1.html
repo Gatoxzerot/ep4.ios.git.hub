@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Evaluación Permanente nro. 4 - JavaScript</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        padding: 20px;
+    }
+    .container {
+        max-width: 600px;
+        margin: 0 auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+        text-align: center;
+        color: #333;
+    }
+    p {
+        margin-bottom: 10px;
+    }
+    .output {
+        margin-top: 20px;
+        padding: 10px;
+        background-color: #f0f0f0;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>Operacion numeros impares y cubos</h1>
+    <p>Ingrese dos números para mostrar el cubo de todos los números impares entre ellos inclusive.</p>
+    <form id="inputForm">
+        <label for="numero1">Primer número:</label>
+        <input type="number" id="numero1" name="numero1" required><br><br>
+        <label for="numero2">Segundo número:</label>
+        <input type="number" id="numero2" name="numero2" required><br><br>
+        <button type="submit">Calcular</button>
+    </form>
+
+    <div class="output" id="resultado"></div>
+</div>
+
+<script>
+    document.getElementById('inputForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        // Obtener los valores de los input
+        let numero1 = parseInt(document.getElementById('numero1').value);
+        let numero2 = parseInt(document.getElementById('numero2').value);
+
+        // Validar y ordenar los números para definir el rango
+        let inicio, fin;
+        if (numero1 <= numero2) {
+            inicio = numero1;
+            fin = numero2;
+        } else {
+            inicio = numero2;
+            fin = numero1;
+        }
+
+        // Limpiar resultados anteriores
+        document.getElementById('resultado').innerHTML = '';
+
+        // Calcular y mostrar los cubos de los números impares
+        let output = document.getElementById('resultado');
+        output.innerHTML += `<p>Los cubos de los números impares entre ${inicio} y ${fin} son:</p>`;
+        
+        do {
+            if (inicio % 2 !== 0) {  // Verificar si es impar
+                let cubo = inicio * inicio * inicio;  // Calcular el cubo
+                output.innerHTML += `<p>${inicio}^3 = ${cubo}</p>`;
+            }
+            inicio++;
+        } while (inicio <= fin);
+    });
+</script>
+
+</body>
+</html>
